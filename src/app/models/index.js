@@ -7,7 +7,7 @@ const basename = path.basename(__filename);
 const config = require('../../config/database')
 const db = {};
 
-const sequelize;
+let sequelize;
 
 sequelize = new Sequelize(config.database, config.username, config.password, config);
 

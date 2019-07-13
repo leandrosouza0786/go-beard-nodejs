@@ -26,8 +26,10 @@
         var img = document.querySelector('label[for=avatar] img')
 
         avatarInput.onchange = function(e){
+
             img.classList.add('preview')
             img.src = URL.createObjectURL(e.target.files[0])
+            
         }
     </script>
 {% endblock %}
