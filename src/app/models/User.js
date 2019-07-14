@@ -8,7 +8,20 @@ module.exports = (sequelize, DataTypes) => {
         password: DataTypes.VIRTUAL,
         password_hash: DataTypes.STRING,
         provider: DataTypes.BOOLEAN,
-    })
+    }, {
+            hooks: {
+                beforeSave: async user => {
+                    if (user.password) {
+                        user.password_hash = await bcrtpt.hash(user.password, 8)
+                    }
+                }
+            },
+        }
+    )
+
+    User.prototype.checkpassword = function ( password ){
+        return bcrtpt.compare(password, this.password_hash)
+    }
 
     return User
 }
